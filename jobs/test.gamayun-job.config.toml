@@ -1,0 +1,6 @@
+name = "Test"
+pathToExecutable = "python3"
+cronString = "0/3 * * ? * * *"
+arguments = ["${CONFIGURATION_FILE_PATH}/script.py"]
+tags = ["testTag"]
+resultWaitTimeoutMillis = 1000

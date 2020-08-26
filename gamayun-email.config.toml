@@ -1,0 +1,9 @@
+recipientName = "test test "
+recipientEmail = "test.test@gmail.com"
+senderName = "Gamayun notifer"
+senderEmail = "testNotifier@gmail.com"
+
+smtpHost = "smtp.gmail.com"
+smtpPort = 587
+mailUsername = "testNotifier@gmail.com"
+mailPassword = "pwd"
