@@ -1,0 +1,29 @@
+version : '3.8'
+
+services:
+    mongodb-gamayun-sample:
+        image: mongo:latest
+        container_name: mongodb-gamayun-sample
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: gamayun
+            MONGO_INITDB_ROOT_PASSWORD: gamayun
+        volumes:
+            - gamayun_db_prod:/data/db
+        networks:
+            - gamayun_network
+    
+    
+    gamayun:
+        image: ibrko/gamayun-sample:0.1
+        container_name: gamayun-sample
+        depends_on:
+            - "mongodb-gamayun-sample"
+        networks:
+            - gamayun_network
+
+networks:
+    gamayun_network:
+        driver: bridge 
+
+volumes:
+  gamayun_db_prod:
