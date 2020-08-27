@@ -8,9 +8,9 @@ services:
             MONGO_INITDB_ROOT_USERNAME: gamayun
             MONGO_INITDB_ROOT_PASSWORD: gamayun
         volumes:
-            - gamayun_db_prod:/data/db
+            - gamayun_db_sample:/data/db
         networks:
-            - gamayun_network
+            - gamayun_sample_network
     
     
     gamayun:
@@ -21,11 +21,11 @@ services:
         depends_on:
             - "mongodb-gamayun-sample"
         networks:
-            - gamayun_network
+            - gamayun_sample_network
 
 networks:
-    gamayun_network:
+    gamayun_sample_network:
         driver: bridge 
 
 volumes:
-  gamayun_db_prod:
+    gamayun_db_sample:
