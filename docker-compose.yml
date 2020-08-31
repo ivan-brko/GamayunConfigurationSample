@@ -12,7 +12,6 @@ services:
         networks:
             - gamayun_sample_network
     
-    
     gamayun:
         build:
             context: .
