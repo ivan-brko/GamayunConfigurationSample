@@ -1,17 +1,10 @@
-import GamayunResult_pb2_grpc
-import GamayunResult_pb2
-import grpc
+from gamayun.gamayun_utils import report_result
+from gamayun.gamayun_utils import report_error
+from gamayun.gamayun_utils import run_gamayun_script_logic
 
 
-channel = grpc.insecure_channel('localhost:16656')
-stub = GamayunResult_pb2_grpc.ResultStub(channel)
+def job_logic():
+    report_result(["first result", "second result", "third result"])
 
-valid_json = """
-{
-   "value":"balbalba"
-}
-"""
 
-res = GamayunResult_pb2.TaskResult(jobId = "Test", results = ["test", "AnotherTest", valid_json])
-
-result = stub.ReportResult(res)
+run_gamayun_script_logic(job_logic)
