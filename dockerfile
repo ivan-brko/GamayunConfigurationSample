@@ -15,5 +15,4 @@ RUN apk add --no-cache bash \
     if [ ! -e /usr/bin/pip ]; then ln -s pip3 /usr/bin/pip ; fi && \
     if [[ ! -e /usr/bin/python ]]; then ln -sf /usr/bin/python3 /usr/bin/python; fi && \
     rm -r /root/.cache \
-    # && pip3 install grpcio-tools
-    && pip install -i https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple gamayun-utils==0.2.10
+    && pip install -i https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple gamayun-utils==0.2.11
