@@ -1,0 +1,31 @@
+# the name of the job, which must be unique. It is used to store the data for the job
+#this field is mandatory
+name = "HackerNews" 
+
+# path to executable for the job
+# this field is mandatory
+pathToExecutable = "python3" 
+
+# arguments to be given to the job
+# this field is optional
+arguments = ["${CONFIGURATION_FILE_PATH}/script.py"] 
+
+# cron string for the job (in this case every minute, starting at zero seconds)
+# this field is mandatory
+cronString = "0 0/1 * ? * * *" 
+
+# tags for this job (metadata for the database)
+# this field is optional
+tags = ["tech", "news"] 
+
+# how long should Gamayun wait for results of the job before giving up
+# this field is optional
+resultWaitTimeoutMillis = 5000 
+
+# each stored result will have unique link field. If result is reported with link already in DB, it will be ignored
+# this field is optional
+uniqueIds = ["link"] 
+
+# job will always start randomly somewhere between 0 and 10 seconds after it should be fired by the trigger
+# this field is optional
+randomTriggerOffsetSeconds = 10 

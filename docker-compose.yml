@@ -19,6 +19,8 @@ services:
         container_name: gamayun-sample
         depends_on:
             - "mongodb-gamayun-sample"
+        volumes:
+            - gamayun_logs:/logs/gamayun/
         networks:
             - gamayun_sample_network
 
@@ -28,3 +30,4 @@ networks:
 
 volumes:
     gamayun_db_sample:
+    gamayun_logs:

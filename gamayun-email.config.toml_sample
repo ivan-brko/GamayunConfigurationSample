@@ -7,3 +7,5 @@ smtpHost = "smtp.gmail.com"
 smtpPort = 587
 mailUsername = "testNotifier@gmail.com"
 mailPassword = "pwd"
+
+#remove _sample from the end of this file's name if you want Gamayun to find it
