@@ -7,7 +7,7 @@ from gamayun.gamayun_utils import run_gamayun_script_logic
 
 def parse_single_entry(entry):
     # test if this entry contains comment (if it doesn't it is an ad so we skip it)
-    if entry.find("a", class="comments") is not None:
+    if entry.find("a", class_="comments") is not None:
         result = dict()
         result["title"] = entry.find("a", class_="title").text
         result["link"] = entry.find("a", class_="title")["href"]

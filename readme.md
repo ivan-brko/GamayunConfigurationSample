@@ -1,8 +1,16 @@
 # Sample configuration for Gamayun
-This repo contains a minimal sample configuration for Gamayun Data collector tool, which can be used as a base for creation of new configuration.
-<br>
-Gamayun main repo: https://github.com/ivan-brko/Gamayun
+This repo contains a minimal sample configuration for [Gamayun Data collector tool](https://github.com/ivan-brko/Gamayun), and it can/should be used as a base for creation of new configuration.
 
+# Contents
+
+* [Docker](#docker-top)
+  * [For people unfamiliar with Docker](#for-docker-unfamiliar)
+    * [docker](#docker-low)
+    * [docker-compose](#docker-compose)
+* [Python scripts](#python-scripts)
+* [Sample jobs](#sample-jobs)
+
+<a name="docker-top"></a>
 # Docker
 While Gamayun can be run locally, it is easiest to run it with Docker and this repository contains all the needed docker files.
 
@@ -14,13 +22,14 @@ docker-compose -f docker-compose.yml up
 ```
 If any other packages are missing that need to be used just add a line that installs that package for Alpine (or maybe for pip) in the dockerfile.
 
+<a name="for-docker-unfamiliar"></a>
 ## For people unfamilar with Docker
 Docker is not necessary to run Gamayun but it makes it much easier to do so. 
 There are two tools that need to be installed to run examples from this repo with Docker:
  * ```docker```
  * ```docker-compose```
 
-
+<a name="docker-low"></a>
 ### docker
 
 The ```dockerfile``` in this repository looks roughly like this:
@@ -37,6 +46,7 @@ RUN apk add --no-cache bash
 
 This dockerfile creates a image which will contain both Gamayun and configuration from this repo. When we start this image we get a container which is running Gamayun with this configuration. Note that no commands are needed to build this image as docker-compose takes care of that, as explained below.
 
+<a name="docker-compose"></a>
 ### docker-compose
 
 ```docker-compose``` is a tool which allows easier composition of different containers. In our case, we have one container for Gamayun and one for MongoDB. These two containers need to communicate in order for Gamayun to store results to the database.
@@ -60,11 +70,12 @@ We can run all of this with ```docker-compose up``` in the root of this director
  * ``` docker exec -it gamayun-sample /bin/bash ```
    * if we want to connect to ```/bin/bash``` of the container that is running the Gamayun application with provided configuration
 
-
-# Python script
+<a name="python-scripts"></a>
+# Python scripts
 Python is used in this example, but any language/vm that has grpc support can be used instead (only the dockerfile needs to be modified to install apropriate packages). Protobuf files can be found in the [Gamayun main repo](https://github.com/ivan-brko/Gamayun).
 
 However, for Python there is already Gamayun pip package that can be used for reporting job results or errors (repo can be found [here](https://github.com/ivan-brko/GamayunPyUtils)) which makes it easier to write scripts, so Python is the suggested way to write Gamayun jobs. This package is used in this sample configuration for result reports. 
 
+<a name="sample-jobs"></a>
 # Sample jobs
 This configuration contains two sample jobs, one for scraping data from [r/programming](https://www.reddit.com/r/programming/) and other from [hackernews](https://news.ycombinator.com/).

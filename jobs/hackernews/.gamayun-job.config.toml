@@ -1,6 +1,6 @@
 # the name of the job, which must be unique. It is used to store the data for the job
 #this field is mandatory
-name = "HackerNews" 
+name = "hackernews" 
 
 # path to executable for the job
 # this field is mandatory
