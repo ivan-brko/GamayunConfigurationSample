@@ -4,6 +4,7 @@ This repo contains a minimal sample configuration for [Gamayun Data collector to
 # Contents
 
 * [Docker](#docker-top)
+  * [Running on Raspberry PI (arm64v8)](#rpi)
   * [For people unfamiliar with Docker](#for-docker-unfamiliar)
     * [docker](#docker-low)
     * [docker-compose](#docker-compose)
@@ -22,6 +23,13 @@ docker-compose -f docker-compose.yml up
 ```
 If any other packages are missing that need to be used just add a line that installs that package for Alpine (or maybe for pip) in the dockerfile.
 
+<a name="rpi"></a>
+## Running images on Raspberry PI
+If you want to run on Raspberry PI (on some other arm64v8 architecture), there are prebuild docker images for that as well:
+```docker
+docker-compose -f arm64v8.docker-compose.yml up
+```
+
 <a name="for-docker-unfamiliar"></a>
 ## For people unfamilar with Docker
 Docker is not necessary to run Gamayun but it makes it much easier to do so. 
@@ -32,16 +40,17 @@ There are two tools that need to be installed to run examples from this repo wit
 <a name="docker-low"></a>
 ### docker
 
-The ```dockerfile``` in this repository looks roughly like this:
+The ```dockerfile``` in this repository looks roughly like this (note that there is also _arm64v8.dockerfile_ which looks much the same but has base image for arm64v8):
 ```dockerfile
-FROM ibrko/gamayun:0.2.0 # we are using already existing gamayun image as base image (will be pulled from docker registry)
+# we are using already existing gamayun_py_utils image as base image (will be pulled from docker registry). 
+# This image containes gamayun and utilities for reporting Gamayun job results from python scripts
+FROM ibrko/gamayun_py_utils:0.2.0 
 
-COPY . /configuration # copy everything from this repository to a /configuration folder in the docker container
+# copy everything from this repository to a /configuration folder in the docker container
+COPY . /configuration
 
-ENV GAMAYUN_CONF_ROOT /configuration # set the env var so that Gamayun knows where to look for configuration
-
-RUN apk add --no-cache bash 
-        ... # install all the needed packages we need to run our python scripts
+# set the env var so that Gamayun knows where to look for configuration
+ENV GAMAYUN_CONF_ROOT /configuration
 ```
 
 This dockerfile creates a image which will contain both Gamayun and configuration from this repo. When we start this image we get a container which is running Gamayun with this configuration. Note that no commands are needed to build this image as docker-compose takes care of that, as explained below.
@@ -51,7 +60,7 @@ This dockerfile creates a image which will contain both Gamayun and configuratio
 
 ```docker-compose``` is a tool which allows easier composition of different containers. In our case, we have one container for Gamayun and one for MongoDB. These two containers need to communicate in order for Gamayun to store results to the database.
 
-The ```docker-compose.yml``` that can be found in this repository does the following:
+The ```docker-compose.yml``` that can be found in this repository does the following (note that there is also arm64v8.docker-compose.yml which is the same like this one except it builds image for arm64v8):
  * Defines a service (in docker-compose a synonym for a container) called ```mongodb-gamayun-sample``` which pulls official MongoDB image and runs it
    * The username and password of this database are set to _gamayun_ (change this if you are creating your configuration based on this repo)
    * We set the container to use a volume ```gamayun_db_sample``` and mount it to _/data/db_ directory (directory where MongoDB stores its data) in the container. Volumes are a way to connect filesystems on the host and in the container. At the bottom of the ```docker-compose.yml``` file is a section where we configure this volume and where we want it to map in the host filesystem. As path on host OS is something that is different for everyone that wants to run this sample, no path is configured in this sample configuration so Docker will select some path. For more information about how to set this path check [this SO question](https://stackoverflow.com/questions/36387032/how-to-set-a-path-on-host-for-a-named-volume-in-docker-compose-yml) and read Docker documentation 

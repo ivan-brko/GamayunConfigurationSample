@@ -1,0 +1,33 @@
+version : '3.8'
+
+services:
+    mongodb-gamayun-sample:
+        image: mongo:latest
+        container_name: mongodb-gamayun-sample
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: gamayun
+            MONGO_INITDB_ROOT_PASSWORD: gamayun
+        volumes:
+            - gamayun_db_sample:/data/db
+        networks:
+            - gamayun_sample_network
+    
+    gamayun:
+        build:
+            context: .
+            dockerfile: arm64v8.dockerfile
+        container_name: gamayun-sample
+        depends_on:
+            - "mongodb-gamayun-sample"
+        volumes:
+            - gamayun_logs:/logs/gamayun/
+        networks:
+            - gamayun_sample_network
+
+networks:
+    gamayun_sample_network:
+        driver: bridge 
+
+volumes:
+    gamayun_db_sample:
+    gamayun_logs:
