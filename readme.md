@@ -44,7 +44,7 @@ The ```dockerfile``` in this repository looks roughly like this (note that there
 ```dockerfile
 # we are using already existing gamayun_py_utils image as base image (will be pulled from docker registry). 
 # This image containes gamayun and utilities for reporting Gamayun job results from python scripts
-FROM ibrko/gamayun_py_utils:0.2.0 
+FROM ibrko/gamayun_py_utils:0.2.1 
 
 # copy everything from this repository to a /configuration folder in the docker container
 COPY . /configuration
@@ -87,4 +87,4 @@ However, for Python there is already Gamayun pip package that can be used for re
 
 <a name="sample-jobs"></a>
 # Sample jobs
-This configuration contains two sample jobs, one for scraping data from [r/programming](https://www.reddit.com/r/programming/) and other from [hackernews](https://news.ycombinator.com/).
+This configuration contains three sample jobs, one for scraping data from [r/programming](https://www.reddit.com/r/programming/), one for scrapping data from [autoscout](https://www.autoscout24.hr/)  and one from [hackernews](https://news.ycombinator.com/).

@@ -23,6 +23,8 @@ services:
             - gamayun_logs:/logs/gamayun/
         networks:
             - gamayun_sample_network
+        ports:
+            - 21663:21663
 
 networks:
     gamayun_sample_network:

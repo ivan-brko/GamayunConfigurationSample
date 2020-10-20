@@ -22,10 +22,14 @@ tags = ["programming", "news"]
 # this field is optional
 resultWaitTimeoutMillis = 5000 
 
-# each stored result will have unique comments_link field. If result is reported with comments_link already in DB, it will be ignored
-# this field is optional
-uniqueIds = ["comments_link"] 
-
 # job will always start randomly somewhere between 0 and 10 seconds after it should be fired by the trigger
 # this field is optional
 randomTriggerOffsetSeconds = 10 
+
+# each stored result will have unique comments_link field (that is, all documents with the same value under the key comments_link will be considered duplicates). 
+# We set the duplicate policy to IGNORE_NEW, which means that if result is reported with comments_link already in DB, it will be ignored
+# this field is optional
+[duplicateEntryPolicy]
+uniqueIds = ["comments_link"] 
+onDuplicateEntry = "IGNORE_NEW"
+
